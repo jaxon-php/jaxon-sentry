@@ -44,6 +44,16 @@ trait Armada
     abstract public function httpResponse($code = '200');
 
     /**
+     * Get the Jaxon response.
+     *
+     * @return Response
+     */
+    public function ajaxResponse()
+    {
+        return jaxon()->sentry()->ajaxResponse();
+    }
+
+    /**
      * Wraps the module/package/bundle setup method.
      *
      * @return void
