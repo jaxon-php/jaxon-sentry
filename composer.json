@@ -1,7 +1,7 @@
 {
     "name": "jaxon-php/jaxon-sentry",
     "type": "library",
-    "description": "",
+    "description": "Common classes providing advanced features to the Jaxon library",
     "authors": [
         {"name": "Thierry Feuzeu"}
     ],
