@@ -26,14 +26,14 @@ trait Namespaces
      *
      * @var string
      */
-    protected $sDirectory = array();
+    protected $sDirectory = '';
 
     /**
      * The extension of the current template
      *
      * @var string
      */
-    protected $sExtension = array();
+    protected $sExtension = '';
 
     /**
      * Add a namespace to this template renderer
@@ -62,7 +62,9 @@ trait Namespaces
         $this->sExtension = '';
         if(key_exists($sNamespace, $this->aDirectories))
         {
+            // Make sure there's only one '/' at the end of the string
             $this->sDirectory = rtrim($this->aDirectories[$sNamespace]['path'], '/') . '/';
+            // Make sure there's only one '.' at the beginning of the string
             $this->sExtension = '.' . ltrim($this->aDirectories[$sNamespace]['ext'], '.');
         }
     }
