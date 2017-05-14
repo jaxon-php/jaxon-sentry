@@ -54,6 +54,19 @@ trait Armada
     }
 
     /**
+     * Add a view renderer with an id
+     *
+     * @param string                $sId                The unique identifier of the view renderer
+     * @param Closure               $xClosure           A closure to create the view instance
+     *
+     * @return void
+     */
+    public function addViewRenderer($sId, $xClosure)
+    {
+        jaxon()->sentry()->addViewRenderer($sId, $xClosure);
+    }
+
+    /**
      * Wraps the module/package/bundle setup method.
      *
      * @return void
