@@ -126,6 +126,17 @@ trait Armada
     }
 
     /**
+     * Get the session object
+     *
+     * @return object
+     */
+    public function session()
+    {
+        $this->_jaxonSetup();
+        return jaxon()->sentry()->getSessionManager();
+    }
+
+    /**
      * Register the Jaxon classes.
      *
      * @return void
