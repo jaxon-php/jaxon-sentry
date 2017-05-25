@@ -5,7 +5,7 @@ namespace Jaxon\Sentry\Classes;
 use Jaxon\Sentry\Factory\Request;
 use Jaxon\Sentry\Factory\Paginator;
 
-class Base
+class Armada
 {
     use \Jaxon\Request\Traits\Factory;
 
