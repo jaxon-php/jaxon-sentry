@@ -4,8 +4,6 @@ Jaxon Sentry
 Jaxon is an open source PHP library for easily creating Ajax web applications.
 It allows into a web page to make direct Ajax calls to PHP classes that will in turn update its content, without reloading the entire page.
 
-Jaxon is a fork of the Xajax PHP library.
-
 This package provides common classes implementing advanced features for the Jaxon library.
 
 Features
@@ -14,7 +12,7 @@ Features
 - Views.
 - Sessions.
 - Base class for applications.
-- Request and pagination factories.
+- Request and paginator factories.
 - Base class for framework integration
 
 Documentation
