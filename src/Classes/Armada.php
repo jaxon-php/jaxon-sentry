@@ -50,7 +50,7 @@ class Armada
     /**
      * Get the view renderer
      *
-     * @return object
+     * @return Jaxon\Sentry\View\Facade
      */
     public function view()
     {
@@ -58,9 +58,9 @@ class Armada
     }
 
     /**
-     * Get the session object
+     * Get the session manager
      *
-     * @return object
+     * @return Jaxon\Sentry\Interfaces\Session
      */
     public function session()
     {
