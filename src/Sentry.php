@@ -41,12 +41,22 @@ class Sentry
      */
     public function setup()
     {
+        $jaxon = jaxon();
+
         // Create the Jaxon response
-        $this->xResponse = jaxon()->getResponse();
+        $this->xResponse = $jaxon->getResponse();
 
         // Add the view renderer
         $this->addViewRenderer('sentry', function(){
-            return new View\View();
+            return new \Jaxon\Sentry\View\View();
+        });
+
+        // Set the pagination view namespace
+        $this->addViewNamespace('pagination', '', '', 'sentry');
+
+        // Set the pagination renderer
+        $jaxon->setPaginationRenderer(function(){
+            return new \Jaxon\Sentry\Pagination\Renderer();
         });
     }
 

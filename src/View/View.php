@@ -18,7 +18,10 @@ class View implements ViewInterface
     public function addNamespace($sNamespace, $sDirectory, $sExtension = '')
     {
         // This method is provided by the Template trait
-        jaxon()->addViewNamespace($sNamespace, $sDirectory, $sExtension);
+        if(($sDirectory))
+        {
+            jaxon()->addViewNamespace($sNamespace, $sDirectory, $sExtension);
+        }
     }
 
     /**
