@@ -43,6 +43,11 @@ class Sentry
     {
         // Create the Jaxon response
         $this->xResponse = jaxon()->getResponse();
+
+        // Add the view renderer
+        $this->addViewRenderer('sentry', function(){
+            return new View\View();
+        });
     }
 
     /**
