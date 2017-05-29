@@ -16,7 +16,7 @@ use stdClass, Exception;
 
 class Sentry
 {
-    use Config, View, Session, Manager, Event, Validator;
+    use View, Session, Manager, Event, Validator;
 
     protected $xBeforeCallback = null;
     protected $xAfterCallback = null;
@@ -91,7 +91,7 @@ class Sentry
 
             // The public methods of the base class must not be exported to javascript
             $protected = array();
-            $baseClass = new \ReflectionClass('\\Jaxon\\Sentry\\Classes\\Base');
+            $baseClass = new \ReflectionClass('\\Jaxon\\Sentry\\Classes\\Armada');
             foreach ($baseClass->getMethods(\ReflectionMethod::IS_PUBLIC) as $xMethod)
             {
                 $protected[] = $xMethod->getShortName();
