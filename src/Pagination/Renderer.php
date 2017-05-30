@@ -24,7 +24,7 @@ class Renderer extends \Jaxon\Utils\Pagination\Renderer
      *
      * @return string        The template content
      */
-    protected function render($sTemplate, array $aVars = array())
+    protected function _render($sTemplate, array $aVars = array())
     {
         return jaxon()->sentry()->getViewRenderer()->render($sTemplate, $aVars);
     }
