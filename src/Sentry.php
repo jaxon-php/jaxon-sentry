@@ -3,7 +3,7 @@
 namespace Jaxon\Sentry;
 
 use Jaxon\Jaxon;
-use Jaxon\Sentry\Classes\Base;
+use Jaxon\Sentry\Classes\Armada;
 use Jaxon\Utils\Container;
 use Jaxon\Utils\Traits\Config;
 use Jaxon\Utils\Traits\View;
@@ -289,7 +289,7 @@ class Sentry
      *
      * @return void
      */
-    protected function initInstance(Base $instance)
+    protected function initInstance(Armada $instance)
     {
         // Return if the class instance has already been initialized.
         if(!($instance) || ($instance->response))

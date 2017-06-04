@@ -14,14 +14,14 @@
 
 namespace Jaxon\Sentry\Factory;
 
-use Jaxon\Sentry\Classes\Base;
+use Jaxon\Sentry\Classes\Armada;
 
 class Paginator
 {
     /**
      * The class instance this request factory is attached to
      *
-     * @var Jaxon\Sentry\Classes\Base
+     * @var Jaxon\Sentry\Classes\Armada
      */
     private $instance = null;
 
@@ -58,7 +58,7 @@ class Paginator
      *
      * @return void
      */
-    public function __construct(Base $instance)
+    public function __construct(Armada $instance)
     {
         $this->instance = $instance;
         // $this->reflectionClass = new \ReflectionClass(get_class($instance));

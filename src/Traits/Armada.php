@@ -2,17 +2,7 @@
 
 namespace Jaxon\Sentry\Traits;
 
-use Jaxon\Jaxon;
-use Jaxon\Sentry\Classes\Base;
 use Jaxon\Utils\Container;
-use Jaxon\Utils\Traits\Config;
-use Jaxon\Utils\Traits\View;
-use Jaxon\Utils\Traits\Session;
-use Jaxon\Utils\Traits\Manager;
-use Jaxon\Utils\Traits\Event;
-use Jaxon\Utils\Traits\Validator;
-
-use stdClass, Exception;
 
 trait Armada
 {
