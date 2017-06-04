@@ -14,14 +14,14 @@
 
 namespace Jaxon\Sentry\Factory;
 
-use Jaxon\Sentry\Classes\Armada;
+use Jaxon\Sentry\Armada;
 
 class Paginator
 {
     /**
      * The class instance this request factory is attached to
      *
-     * @var Jaxon\Sentry\Classes\Armada
+     * @var Jaxon\Sentry\Armada
      */
     private $instance = null;
 

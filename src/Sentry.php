@@ -3,7 +3,7 @@
 namespace Jaxon\Sentry;
 
 use Jaxon\Jaxon;
-use Jaxon\Sentry\Classes\Armada;
+use Jaxon\Sentry\Armada;
 use Jaxon\Utils\Container;
 use Jaxon\Utils\Traits\Config;
 use Jaxon\Utils\Traits\View;
