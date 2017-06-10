@@ -3,9 +3,6 @@
 namespace Jaxon\Sentry;
 
 use Jaxon\Jaxon;
-use Jaxon\Sentry\Armada;
-use Jaxon\Utils\Container;
-use Jaxon\Utils\Traits\Config;
 use Jaxon\Utils\Traits\View;
 use Jaxon\Utils\Traits\Session;
 use Jaxon\Utils\Traits\Manager;
@@ -63,7 +60,7 @@ class Sentry
     /**
      * Get the Jaxon response.
      *
-     * @return Response
+     * @return Jaxon\Response\Response
      */
     public function ajaxResponse()
     {
@@ -106,7 +103,7 @@ class Sentry
 
             // The public methods of the base class must not be exported to javascript
             $protected = array();
-            $baseClass = new \ReflectionClass('\\Jaxon\\Sentry\\Classes\\Armada');
+            $baseClass = new \ReflectionClass('\\Jaxon\\Sentry\\Armada');
             foreach ($baseClass->getMethods(\ReflectionMethod::IS_PUBLIC) as $xMethod)
             {
                 $protected[] = $xMethod->getShortName();
@@ -230,6 +227,7 @@ class Sentry
      * Set the init callback, used to initialise class instances.
      *
      * @param  callable         $callable               The callback function
+     * 
      * @return void
      */
     public function setInitCallback($callable)
@@ -241,6 +239,7 @@ class Sentry
      * Set the pre-request processing callback.
      *
      * @param  callable         $callable               The callback function
+     * 
      * @return void
      */
     public function setBeforeCallback($callable)
@@ -310,7 +309,7 @@ class Sentry
      *
      * @param  string  $classname the class name
      * 
-     * @return object  The registered instance of the class
+     * @return Jaxon\Sentry\Armada|null  The registered instance of the class
      */
     public function instance($classname)
     {
@@ -331,7 +330,7 @@ class Sentry
      *
      * @param  string  $classname the class name
      * 
-     * @return object  The request to the class
+     * @return Jaxon\Request\Request|null  The request to the class
      */
     public function request($classname)
     {
@@ -344,7 +343,7 @@ class Sentry
      *
      * @param  boolean  &$bEndRequest if set to true, the request processing is interrupted.
      * 
-     * @return object  the Jaxon response
+     * @return Jaxon\Response\Response  the Jaxon response
      */
     public function onEventBefore(&$bEndRequest)
     {
@@ -380,7 +379,7 @@ class Sentry
     /**
      * This is the post-request processing callback passed to the Jaxon library.
      *
-     * @return object  the Jaxon response
+     * @return Jaxon\Response\Response  the Jaxon response
      */
     public function onEventAfter()
     {
@@ -394,7 +393,7 @@ class Sentry
     /**
      * This callback is called whenever an invalid request is processed.
      *
-     * @return object  the Jaxon response
+     * @return Jaxon\Response\Response  the Jaxon response
      */
     public function onEventInvalid($sMessage)
     {
@@ -408,7 +407,7 @@ class Sentry
     /**
      * This callback is called whenever an invalid request is processed.
      *
-     * @return object  the Jaxon response
+     * @return Jaxon\Response\Response  the Jaxon response
      */
     public function onEventError(Exception $e)
     {

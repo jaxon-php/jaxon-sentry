@@ -67,7 +67,7 @@ class Armada
     /**
      * Get the request factory.
      *
-     * @return Factory\Request
+     * @return Jaxon\Sentry\Factory\Request
      */
     public function request()
     {
@@ -77,7 +77,7 @@ class Armada
     /**
      * Get the request factory.
      *
-     * @return Factory\Request
+     * @return Jaxon\Sentry\Factory\Request
      */
     public function rq()
     {
@@ -91,7 +91,7 @@ class Armada
      * @param integer $nItemsPerPage the number of items per page
      * @param integer $nCurrentPage the current page
      *
-     * @return Factory\Paginator
+     * @return Jaxon\Sentry\Factory\Paginator
      */
     public function paginator($nItemsTotal, $nItemsPerPage, $nCurrentPage)
     {
@@ -106,7 +106,7 @@ class Armada
      * @param integer $nItemsPerPage the number of items per page
      * @param integer $nCurrentPage the current page
      *
-     * @return Factory\Paginator
+     * @return Jaxon\Sentry\Factory\Paginator
      */
     public function pg($nItemsTotal, $nItemsPerPage, $nCurrentPage)
     {
@@ -144,7 +144,7 @@ class Armada
      *
      * @param string $name the class name
      * 
-     * @return object the Jaxon class instance, or null
+     * @return Jaxon\Sentry\Armada|null the Jaxon class instance, or null
      */
     public function instance($name)
     {
@@ -166,7 +166,7 @@ class Armada
      *
      * @param string $name the class name
      * 
-     * @return object the Jaxon class instance, or null
+     * @return Jaxon\Sentry\Armada|null the Jaxon class instance, or null
      */
     public function cl($name)
     {
