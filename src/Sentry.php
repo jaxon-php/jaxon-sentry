@@ -9,7 +9,8 @@ use Jaxon\Utils\Traits\Manager;
 use Jaxon\Utils\Traits\Event;
 use Jaxon\Utils\Traits\Validator;
 
-use stdClass, Exception;
+use stdClass;
+use Exception;
 
 class Sentry
 {
@@ -44,7 +45,7 @@ class Sentry
         $this->xResponse = $jaxon->getResponse();
 
         // Add the view renderer
-        $this->addViewRenderer('sentry', function(){
+        $this->addViewRenderer('sentry', function () {
             return new \Jaxon\Sentry\View\View();
         });
 
@@ -52,7 +53,7 @@ class Sentry
         $this->addViewNamespace('pagination', '', '', 'sentry');
 
         // Set the pagination renderer
-        $jaxon->setPaginationRenderer(function(){
+        $jaxon->setPaginationRenderer(function () {
             return new \Jaxon\Sentry\Pagination\Renderer();
         });
     }
@@ -227,7 +228,7 @@ class Sentry
      * Set the init callback, used to initialise class instances.
      *
      * @param  callable         $callable               The callback function
-     * 
+     *
      * @return void
      */
     public function setInitCallback($callable)
@@ -239,7 +240,7 @@ class Sentry
      * Set the pre-request processing callback.
      *
      * @param  callable         $callable               The callback function
-     * 
+     *
      * @return void
      */
     public function setBeforeCallback($callable)
@@ -251,7 +252,7 @@ class Sentry
      * Set the post-request processing callback.
      *
      * @param  callable         $callable               The callback function
-     * 
+     *
      * @return void
      */
     public function setAfterCallback($callable)
@@ -263,7 +264,7 @@ class Sentry
      * Set the processing error callback.
      *
      * @param  callable         $callable               The callback function
-     * 
+     *
      * @return void
      */
     public function setInvalidCallback($callable)
@@ -275,7 +276,7 @@ class Sentry
      * Set the processing exception callback.
      *
      * @param  callable         $callable               The callback function
-     * 
+     *
      * @return void
      */
     public function setErrorCallback($callable)
@@ -308,7 +309,7 @@ class Sentry
      * Get a class instance.
      *
      * @param  string  $classname the class name
-     * 
+     *
      * @return Jaxon\Sentry\Armada|null  The registered instance of the class
      */
     public function instance($classname)
@@ -329,7 +330,7 @@ class Sentry
      * Get a Jaxon request to a given class.
      *
      * @param  string  $classname the class name
-     * 
+     *
      * @return Jaxon\Request\Request|null  The request to the class
      */
     public function request($classname)
@@ -342,7 +343,7 @@ class Sentry
      * This is the pre-request processing callback passed to the Jaxon library.
      *
      * @param  boolean  &$bEndRequest if set to true, the request processing is interrupted.
-     * 
+     *
      * @return Jaxon\Response\Response  the Jaxon response
      */
     public function onEventBefore(&$bEndRequest)
