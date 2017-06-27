@@ -152,7 +152,7 @@ trait Armada
      * Get a Jaxon request to a given class.
      *
      * @param  string  $classname the class name
-     * 
+     *
      * @return object  The request to the class
      */
     public function request($classname)
@@ -164,7 +164,7 @@ trait Armada
      * Get a plugin instance.
      *
      * @param  string  $name the plugin name
-     * 
+     *
      * @return object  The plugin instance
      */
     public function plugin($name)
@@ -245,7 +245,7 @@ trait Armada
      * Set the post-request processing callback.
      *
      * @param  callable         $callable               The callback function
-     * 
+     *
      * @return void
      */
     public function onAfter($callable)
@@ -257,7 +257,7 @@ trait Armada
      * Set the processing error callback.
      *
      * @param  callable         $callable               The callback function
-     * 
+     *
      * @return void
      */
     public function onInvalid($callable)
@@ -269,7 +269,7 @@ trait Armada
      * Set the processing exception callback.
      *
      * @param  callable         $callable               The callback function
-     * 
+     *
      * @return void
      */
     public function onError($callable)
