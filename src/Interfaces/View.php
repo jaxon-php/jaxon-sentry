@@ -19,9 +19,9 @@ interface View
 
     /**
      * Render a view
-     * 
+     *
      * @param Store         $store        A store populated with the view data
-     * 
+     *
      * @return string        The string representation of the view
      */
     public function render(Store $store);
