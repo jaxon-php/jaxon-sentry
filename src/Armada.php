@@ -115,7 +115,7 @@ class Armada
 
     /**
      * Create a JQuery Element with a given selector, and link it to the response attribute.
-     * 
+     *
      * @param string        $sSelector            The jQuery selector
      * @param string        $sContext             A context associated to the selector
      *
@@ -128,7 +128,7 @@ class Armada
 
     /**
      * Create a JQuery Element with a given selector, and link it to the response attribute.
-     * 
+     *
      * @param string        $sSelector            The jQuery selector
      * @param string        $sContext             A context associated to the selector
      *
@@ -143,7 +143,7 @@ class Armada
      * Get an instance of a Jaxon class by name
      *
      * @param string $name the class name
-     * 
+     *
      * @return Jaxon\Sentry\Armada|null the Jaxon class instance, or null
      */
     public function instance($name)
@@ -154,7 +154,7 @@ class Armada
             $name = $this->getJaxonClassPath() . $name;
         }
         // The class namespace is prepended to the class name
-        else if(($namespace = $this->getJaxonNamespace()))
+        elseif(($namespace = $this->getJaxonNamespace()))
         {
             $name = str_replace('\\', '.', trim($namespace, '\\')) . '.' . $name;
         }
@@ -165,7 +165,7 @@ class Armada
      * Get an instance of a Jaxon class by name
      *
      * @param string $name the class name
-     * 
+     *
      * @return Jaxon\Sentry\Armada|null the Jaxon class instance, or null
      */
     public function cl($name)
