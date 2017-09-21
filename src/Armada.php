@@ -154,9 +154,9 @@ class Armada
             $name = $this->getJaxonClassPath() . $name;
         }
         // The class namespace is prepended to the class name
-        elseif(($namespace = $this->getJaxonNamespace()))
+        elseif(substr($name, 0, 1) == ':' && ($namespace = $this->getJaxonNamespace()))
         {
-            $name = str_replace('\\', '.', trim($namespace, '\\')) . '.' . $name;
+            $name = str_replace('\\', '.', trim($namespace, '\\')) . '.' . substr($name, 1);
         }
         return jaxon()->sentry()->instance($name);
     }
