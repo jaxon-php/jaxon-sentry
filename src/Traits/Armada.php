@@ -147,7 +147,26 @@ trait Armada
     public function register(array $aOptions = array())
     {
         $this->_jaxonSetup();
-        jaxon()->registerClasses($aOptions);
+        $aCfgOptions = $this->appConfig->getOption('options.classes', []);
+        // The options in parameters overwrite those in the config file.=,
+        // and the merge is done at option level, and not at class level.
+        foreach($aOptions as $class => $aClassOption)
+        {
+            if(!array_key_exists($class, $aCfgOptions))
+            {
+                $aCfgOptions[$class] = $aClassOption;
+            }
+            else
+            {
+                foreach($aClassOption as $key => $aOption)
+                {
+                    // Merge the options
+                    $aCfgOptions[$class][$key] = !array_key_exists($key, $aCfgOptions[$class]) ?
+                        $aOption : array_merge($aCfgOptions[$class][$key], $aOption);
+                }
+            }
+        }
+        jaxon()->registerClasses($aCfgOptions);
     }
 
     /**
