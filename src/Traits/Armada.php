@@ -140,12 +140,14 @@ trait Armada
     /**
      * Register the Jaxon classes.
      *
+     * @param array             $aOptions               The options to register the classes with
+     *
      * @return void
      */
-    public function register()
+    public function register(array $aOptions = array())
     {
         $this->_jaxonSetup();
-        jaxon()->registerClasses();
+        jaxon()->registerClasses($aOptions);
     }
 
     /**
