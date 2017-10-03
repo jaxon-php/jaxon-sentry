@@ -320,4 +320,14 @@ trait Armada
         // Process Jaxon Request
         jaxon()->sentry()->processRequest();
     }
+
+   /**
+     * Get the uploaded files
+     *
+     * @return array
+     */
+    public function getUploadedFiles()
+    {
+        return jaxon()->getUploadedFiles();
+    }
 }

@@ -172,4 +172,14 @@ class Armada
     {
         return $this->instance($name);
     }
+
+   /**
+     * Get the uploaded files
+     *
+     * @return array
+     */
+    public function getUploadedFiles()
+    {
+        return jaxon()->getUploadedFiles();
+    }
 }
