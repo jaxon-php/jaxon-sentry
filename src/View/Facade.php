@@ -22,7 +22,7 @@ class Facade
 
     /**
      * Get the current store or create a new store
-     * 
+     *
      * @return Store        The current store
      */
     protected function store()
@@ -39,7 +39,7 @@ class Facade
      *
      * @param string        $name            The data name
      * @param string        $value           The data value
-     * 
+     *
      * @return void
      */
     public function set($name, $value)
@@ -53,7 +53,7 @@ class Facade
      *
      * @param string        $name            The data name
      * @param string        $value           The data value
-     * 
+     *
      * @return void
      */
     public function share($name, $value)
@@ -69,7 +69,7 @@ class Facade
      *
      * @param string        $sViewName        The view name
      * @param array         $aViewData        The view data
-     * 
+     *
      * @return Store        A store populated with the view data
      */
     public function render($sViewName, array $aViewData = array())
