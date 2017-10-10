@@ -21,7 +21,7 @@ class Store
      *
      * @param string        $name            The data name
      * @param string        $value           The data value
-     * 
+     *
      * @return void
      */
     public function with($name, $value)
@@ -37,7 +37,7 @@ class Store
      * @param string        $sNamespace       The view namespace
      * @param string        $sViewName        The view name
      * @param string        $aViewData        The view data
-     * 
+     *
      * @return void
      */
     public function setView($sRenderer, $sNamespace, $sViewName, array $aViewData = array())
@@ -50,7 +50,7 @@ class Store
 
     /**
      * Get the view namespace
-     * 
+     *
      * @return string        The view namespace
      */
     public function getNamespace()
@@ -60,7 +60,7 @@ class Store
 
     /**
      * Get the view name
-     * 
+     *
      * @return string        The view name
      */
     public function getViewName()
@@ -70,7 +70,7 @@ class Store
 
     /**
      * Get the view data
-     * 
+     *
      * @return array         The view data
      */
     public function getViewData()
@@ -80,7 +80,7 @@ class Store
 
     /**
      * Render a view using third party view system
-     * 
+     *
      * @return string        The string representation of the view
      */
     public function __toString()
