@@ -322,6 +322,26 @@ trait Armada
     }
 
    /**
+     * Check if uploaded files are available
+     *
+     * @return boolean
+     */
+    public function hasUploadedFiles()
+    {
+        return jaxon()->hasUploadedFiles();
+    }
+
+    /**
+     * Check uploaded files validity and move them to the user dir
+     *
+     * @return boolean
+     */
+    public function saveUploadedFiles()
+    {
+        return jaxon()->saveUploadedFiles();
+    }
+
+   /**
      * Get the uploaded files
      *
      * @return array
