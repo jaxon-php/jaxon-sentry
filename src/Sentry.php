@@ -8,6 +8,7 @@ use Jaxon\Utils\Traits\Session;
 use Jaxon\Utils\Traits\Manager;
 use Jaxon\Utils\Traits\Event;
 use Jaxon\Utils\Traits\Validator;
+use Jaxon\Utils\Config\Config;
 
 use stdClass;
 use Exception;
@@ -16,6 +17,7 @@ class Sentry
 {
     use View, Session, Manager, Event, Validator;
 
+    protected $aClassInitCallbacks = [];
     protected $xBeforeCallback = null;
     protected $xAfterCallback = null;
     protected $xInitCallback = null;
@@ -25,6 +27,8 @@ class Sentry
     // Requested class and method
     private $xRequestObject = null;
     private $sRequestMethod = null;
+
+    protected $aClassOptions = [];
 
     protected $appConfig = null;
     protected $xResponse = null;
@@ -90,13 +94,13 @@ class Sentry
     }
 
     /**
-     * ASet the class namespaces.
+     * Read class namespaces from config values.
      *
-     * @param array             $xAppConfig             The application config options
+     * @param Config            $xAppConfig             The application config options
      *
      * @return void
      */
-    public function setClassNamespaces($xAppConfig)
+    public function addClassNamespaces($xAppConfig)
     {
         if($xAppConfig->hasOption('classes') && is_array($xAppConfig->getOption('classes')))
         {
@@ -132,6 +136,60 @@ class Sentry
     }
 
     /**
+     * Read class namespaces from config values.
+     *
+     * @param Config            $xAppConfig             The application config options
+     *
+     * @return void
+     */
+    public function setClassNamespaces($xAppConfig)
+    {
+        $this->addClassNamespaces($xAppConfig);
+    }
+
+    /**
+     * Read class options from config values.
+     *
+     * @param array             $aOptions               The application config options
+     *
+     * @return void
+     */
+    public function mergeClassOptions($aOptions)
+    {
+        // The new options overwrite those already saved, and the merge
+        // shall be done at option level, and not at class level.
+        foreach($aOptions as $class => $aClassOption)
+        {
+            if(!array_key_exists($class, $this->aClassOptions))
+            {
+                $this->aClassOptions[$class] = $aClassOption;
+            }
+            else
+            {
+                foreach($aClassOption as $key => $aOption)
+                {
+                    // Merge the options
+                    $this->aClassOptions[$class][$key] = array_key_exists($key, $this->aClassOptions[$class]) ?
+                        array_merge($this->aClassOptions[$class][$key], $aOption) : $aOption;
+                }
+            }
+        }
+    }
+
+    /**
+     * Read class options from config values.
+     *
+     * @param Config            $xAppConfig             The application config options
+     *
+     * @return void
+     */
+    public function addClassOptions($xAppConfig)
+    {
+        $aOptions = $xAppConfig->getOption('options.classes', []);
+        $this->mergeClassOptions($aOptions);
+    }
+
+    /**
      * Add a view namespace, and set the corresponding renderer.
      *
      * @param string        $sNamespace         The namespace name
@@ -162,11 +220,11 @@ class Sentry
     /**
      * Set the view namespaces.
      *
-     * @param array             $xAppConfig             The application config options
+     * @param Config            $xAppConfig             The application config options
      *
      * @return void
      */
-    public function setViewNamespaces($xAppConfig)
+    public function addViewNamespaces($xAppConfig)
     {
         $sDefaultNamespace = $xAppConfig->getOption('options.views.default', false);
         if(is_array($namespaces = $xAppConfig->getOptionNames('views')))
@@ -189,6 +247,18 @@ class Sentry
         // Save the view renderers and namespaces in the DI container
         $this->initViewRenderers($this->aViewRenderers);
         $this->initViewNamespaces($this->aViewNamespaces, $sDefaultNamespace);
+    }
+
+    /**
+     * Set the view namespaces.
+     *
+     * @param Config            $xAppConfig             The application config options
+     *
+     * @return void
+     */
+    public function setViewNamespaces($xAppConfig)
+    {
+        $this->addViewNamespaces($xAppConfig);
     }
 
     /**
@@ -225,9 +295,23 @@ class Sentry
     }
 
     /**
+     * Add a callback to initialise specific class instances.
+     *
+     * @param string            $sNamespace         The namespace name
+     * @param callable          $callable           The callback function
+     *
+     * @return void
+     */
+    public function addClassInitializer($sNamespace, $callable)
+    {
+        $sNamespace = trim($sNamespace, '\\ ') . '\\';
+        $this->aClassInitCallbacks[$sNamespace] = $callable;
+    }
+
+    /**
      * Set the init callback, used to initialise class instances.
      *
-     * @param  callable         $callable               The callback function
+     * @param callable          $callable               The callback function
      *
      * @return void
      */
@@ -239,7 +323,7 @@ class Sentry
     /**
      * Set the pre-request processing callback.
      *
-     * @param  callable         $callable               The callback function
+     * @param callable          $callable               The callback function
      *
      * @return void
      */
@@ -251,7 +335,7 @@ class Sentry
     /**
      * Set the post-request processing callback.
      *
-     * @param  callable         $callable               The callback function
+     * @param callable          $callable               The callback function
      *
      * @return void
      */
@@ -263,7 +347,7 @@ class Sentry
     /**
      * Set the processing error callback.
      *
-     * @param  callable         $callable               The callback function
+     * @param callable          $callable               The callback function
      *
      * @return void
      */
@@ -275,7 +359,7 @@ class Sentry
     /**
      * Set the processing exception callback.
      *
-     * @param  callable         $callable               The callback function
+     * @param callable          $callable               The callback function
      *
      * @return void
      */
@@ -302,6 +386,17 @@ class Sentry
         {
             call_user_func_array($this->xInitCallback, array($instance));
         }
+        // Apply class initializer
+        foreach($this->aClassInitCallbacks as $namespace => $callback)
+        {
+            $classname = get_class($instance);
+            if(strpos($classname, $namespace) !== false)
+            {
+                // Call the callback passing the class instance as parameter
+                $callback($instance);
+            }
+        }
+        // Call the init() function of the instance class
         $instance->init();
     }
 
@@ -421,6 +516,16 @@ class Sentry
             throw $e;
         }
         return $this->xResponse;
+    }
+
+    /**
+     * Register the Jaxon classes.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        jaxon()->registerClasses($this->aClassOptions);
     }
 
     /**
