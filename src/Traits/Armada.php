@@ -155,6 +155,18 @@ trait Armada
     }
 
     /**
+     * Get an instance of a Jaxon class.
+     *
+     * @param  string  $classname the class name
+     *
+     * @return object  The instance of the class
+     */
+    public function instance($classname)
+    {
+        return jaxon()->sentry()->instance($classname);
+    }
+
+    /**
      * Get a Jaxon request to a given class.
      *
      * @param  string  $classname the class name
