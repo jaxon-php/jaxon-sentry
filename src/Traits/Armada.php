@@ -75,7 +75,10 @@ trait Armada
 
         // Set this object as the Armada in the DI container.
         // Now it will be returned by a call to jaxon()->armada().
-        Container::getInstance()->setArmada($this);
+        if(get_class($this) != 'Jaxon\\Armada\\Armada')
+        {
+            Container::getInstance()->setArmada($this);
+        }
 
         // Event before setting up the module
         $sentry->triggerEvent('pre.setup');
@@ -119,7 +122,6 @@ trait Armada
      */
     public function view()
     {
-        $this->_jaxonSetup();
         return jaxon()->sentry()->getViewRenderer();
     }
 
@@ -130,7 +132,6 @@ trait Armada
      */
     public function session()
     {
-        $this->_jaxonSetup();
         return jaxon()->sentry()->getSessionManager();
     }
 
@@ -143,8 +144,6 @@ trait Armada
      */
     public function register(array $aOptions = array())
     {
-        $this->_jaxonSetup();
-
         $sentry = jaxon()->sentry();
         $sentry->addClassOptions($this->appConfig);
         $sentry->mergeClassOptions($aOptions);
@@ -197,7 +196,6 @@ trait Armada
      */
     public function registerClass($sClassName, array $aOptions = array())
     {
-        $this->_jaxonSetup();
         jaxon()->registerClass($sClassName, $aOptions);
     }
 
@@ -208,7 +206,6 @@ trait Armada
      */
     public function script($bIncludeJs = false, $bIncludeCss = false)
     {
-        $this->_jaxonSetup();
         return jaxon()->getScript($bIncludeJs, $bIncludeCss);
     }
 
@@ -219,7 +216,6 @@ trait Armada
      */
     public function js()
     {
-        $this->_jaxonSetup();
         return jaxon()->getJs();
     }
 
@@ -230,7 +226,6 @@ trait Armada
      */
     public function css()
     {
-        $this->_jaxonSetup();
         return jaxon()->getCss();
     }
 
@@ -299,7 +294,6 @@ trait Armada
      */
     public function canProcessRequest()
     {
-        $this->_jaxonSetup();
         return jaxon()->canProcessRequest();
     }
 
@@ -310,7 +304,6 @@ trait Armada
      */
     public function processRequest()
     {
-        $this->_jaxonSetup();
         // Process Jaxon Request
         jaxon()->sentry()->processRequest();
     }
@@ -343,5 +336,17 @@ trait Armada
     public function getUploadedFiles()
     {
         return jaxon()->getUploadedFiles();
+    }
+
+    /**
+     * Get an Armada package instance
+     *
+     * @param string $name                  The package name
+     *
+     * @return mixed   The package instance
+     */
+    public function package($name)
+    {
+        return jaxon()->sentry()->getPackage($name);
     }
 }
