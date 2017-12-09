@@ -12,6 +12,7 @@ use Jaxon\Utils\Config\Config;
 
 use stdClass;
 use Exception;
+use Closure;
 
 class Sentry
 {
@@ -35,6 +36,14 @@ class Sentry
 
     protected $aViewRenderers = array();
     protected $aViewNamespaces = array();
+
+    // The Dependency Injection Container
+    private $di = null;
+
+    public function __construct()
+    {
+        $this->di = new \Pimple\Container();
+    }
 
     /**
      * Setup the library.
@@ -546,5 +555,30 @@ class Sentry
             // Traiter la requete
             $jaxon->processRequest();
         }
+    }
+
+    /**
+     * Register a package in the DI container
+     *
+     * @param string $name                  The package name
+     * @param Closure $closure              The package instance, or a closure that returns the instance
+     *
+     * @return void
+     */
+    public function registerPackage($name, Closure $closure)
+    {
+        $this->di['package.' . $name] = $closure;
+    }
+
+    /**
+     * Get a package instance from the DI container
+     *
+     * @param string $name                  The package name
+     *
+     * @return mixed   The package instance
+     */
+    public function getPackage($name)
+    {
+        return $this->di['package.' . $name];
     }
 }
