@@ -18,6 +18,9 @@
     "autoload": {
         "psr-4": {
             "Jaxon\\Sentry\\": "src/"
-        }
+        },
+        "files": [
+            "src/start.php"
+        ]
     }
 }

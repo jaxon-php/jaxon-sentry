@@ -74,11 +74,8 @@ trait Armada
         $jaxon->useComposerAutoloader();
 
         // Set this object as the Armada in the DI container.
-        // Now it will be returned by a call to jaxon()->module().
-        if(get_class($this) != 'Jaxon\\Armada\\Armada')
-        {
-            Container::getInstance()->setArmada($this);
-        }
+        // Now it will be returned by a call to jaxon()->armada().
+        Container::getInstance()->setArmada($this);
 
         // Event before setting up the module
         $sentry->triggerEvent('pre.setup');
