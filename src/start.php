@@ -17,6 +17,6 @@
 /*
  * Register the Sentry instance in the DI container
  */
-\Jaxon\Utils\Container::getInstance()->setSentry(function ($c) {
+\Jaxon\DI\Container::getInstance()->setSentry(function ($c) {
     return new \Jaxon\Sentry\Sentry();
 });

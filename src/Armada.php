@@ -16,25 +16,16 @@ class Armada
     /**
      * The request factory
      *
-     * @var Request\Factory
+     * @var Factory\Request
      */
-    private $rqFactory;
+    public $rqFactory;
 
     /**
      * The paginator factory
      *
-     * @var Request\Paginator
+     * @var Factory\Paginator
      */
-    private $pgFactory;
-
-    /**
-     * Create a new instance.
-     */
-    public function __construct()
-    {
-        $this->rqFactory = new Factory\Request($this);
-        $this->pgFactory = new Factory\Paginator($this);
-    }
+    public $pgFactory;
 
     /**
      * Initialize the instance.

@@ -391,6 +391,9 @@ class Sentry
         }
         // Init the class instance
         $instance->response = $this->xResponse;
+        $instance->rqFactory = new Factory\Request($instance);
+        $instance->pgFactory = new Factory\Paginator($instance);
+
         if(($this->xInitCallback))
         {
             call_user_func_array($this->xInitCallback, array($instance));
